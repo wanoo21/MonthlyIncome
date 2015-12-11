@@ -1,0 +1,13 @@
+doctype html
+html(ng-app="MyApp")
+	head
+		title= title
+		link(rel='stylesheet',href='/stylesheets/style.css')
+		script(src="//code.angularjs.org/1.5.0-rc.0/angular.min.js")
+	body(ng-cloak)
+		h1= title
+		p Welcome to #{title}
+		div(ng-controller="MyCtrl as Main")
+			{{Main.title}}
+		script(src="//code.angularjs.org/1.5.0-rc.0/angular-resource.min.js")
+		script(src="/javascripts/app.js")
