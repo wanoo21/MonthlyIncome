@@ -4,10 +4,7 @@ var app = angular.module('MyApp', ['ngResource']);
 app.controller('MyCtrl', function($scope, $resource){
 	var self = this;
 	
-	self.title = "Title from angular"
-	
-	self.incomes = self.expens = []
-	
+	self.incomeAmount = null;
 	
 })
 

@@ -1,13 +1,29 @@
 doctype html
-html(ng-app="MyApp")
+html
 	head
-		title= title
+		block title
+			title= title
+		meta(name="viewport",content="width=device-width, initial-scale=1.0, user-scalable=no")
+		link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel="stylesheet", integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==", crossorigin="anonymous")
 		link(rel='stylesheet',href='/stylesheets/style.css')
-		script(src="//code.angularjs.org/1.5.0-rc.0/angular.min.js")
-	body(ng-cloak)
-		h1= title
-		p Welcome to #{title}
-		div(ng-controller="MyCtrl as Main")
-			{{Main.title}}
-		script(src="//code.angularjs.org/1.5.0-rc.0/angular-resource.min.js")
-		script(src="/javascripts/app.js")
+	body
+		nav.navbar.navbar-default.navbar-fixed-top
+				.container-fluid
+					.navbar-header
+						button.navbar-toggle.collapsed(type="button",data-toggle="collapse",data-target="#bs-example-navbar-collapse-1",aria-expanded="false")
+							span.sr-only Toggle navigation
+							each val in [0, 1, 2]
+								span.icon-bar
+						a.navbar-brand(href='#') Monthly Income
+					.collapse.navbar-collapse#bs-example-navbar-collapse-1
+						ul.nav.navbar-nav.navbar-right
+							li 
+								a(href='/login') Login
+							li 
+								a(href='/register') Register
+		.container
+			block content
+				h1 Welcome #{title}
+				
+		script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js")
+		script(src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js", integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==", crossorigin="anonymous")

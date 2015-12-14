@@ -1,0 +1,34 @@
+extends ./layout.jade
+
+block content
+	div(ng-controller="MyCtrl as Main")
+		.col-md-6.col-sm-6.col-xs-12
+			h2 Income list 
+				span(ng-bind="Main.incomeAmount")
+			.input-group
+				input.form-control(type="text",placeholder="Create new income",ng-model="Main.incomeText",ng-if="!showAmount")
+				input.form-control(type="number",placeholder="The amount of income",ng-model="Main.incomeAmount",ng-if="showAmount")
+				.input-group-btn
+					button.btn.btn-success(ng-click="showAmount = !showAmount", ng-class='{active: !!showAmount}') Add Amount
+					button.btn.btn-success(ng-disabled="!Main.incomeText.length || Main.incomeAmount < 1") Add
+			br
+			div.list-group
+				a.list-group-item.list-group-item-success(href='#',ng-if="Main.incomeText.length") 
+					span.badge {{Main.incomeAmount | currency: 'MDL '}}
+					{{Main.incomeText}}
+				each n in [0,1,2]
+					a.list-group-item.list-group-item-success(class={active: n == 1}, href='#')
+						span.badge 12
+						| Cras #{n}
+		.col-md-6.col-sm-6.col-xs-12
+			h2 Exposure list
+			.input-group
+				input.form-control(type="text",placeholder="Create new exposure")
+				.input-group-btn
+					button.btn.btn-danger Add Amount
+			br
+			div.list-group
+				each n in [0,1,2]
+					a.list-group-item.list-group-item-danger(class={active: n == 2}, href='#')
+						span.badge 12
+						| Cras #{n}

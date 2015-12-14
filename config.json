@@ -1,0 +1,5 @@
+{
+	"mongoose": {
+        "uri": "mongodb://monthly-income:monthly-income@ds056688.mongolab.com:56688/monthly-income"
+    }
+}
