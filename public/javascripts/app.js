@@ -40,6 +40,7 @@ app.controller('MyCtrl', function($scope, $resource){
 	
 	// Remove income or expeditures 
 	self.remove = function(model, index) {
+		console.dir(self[model][index])
 		self.selected.$remove(function(){
 			self[model].splice(index, 1);
 		})

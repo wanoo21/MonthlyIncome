@@ -24,7 +24,7 @@ block content
 				a.list-group-item.list-group-item-success(href='#',ng-if="Main.income.addText.length")
 					span.badge {{Main.income.addAmount | currency: 'EUR '}}
 					| {{Main.income.addText}}
-				a.list-group-item.list-group-item-success(href='#',ng-repeat="income in Main.incomes | orderBy: '-amount'",ng-mouseover="Main.selected = income",data-toggle="tooltip",title="Click to remove",ng-mouseleave="Main.selected = null",ng-class="{active: Main.selected == income}",ng-click="Main.remove('incomes', $index)")
+				a.list-group-item.list-group-item-success(href='#',ng-repeat="income in Main.incomes",ng-mouseover="Main.selected = income",data-toggle="tooltip",title="Click to remove",ng-mouseleave="Main.selected = null",ng-class="{active: Main.selected == income}",ng-click="Main.remove('incomes', $index)")
 					span.badge {{income.amount | currency: 'EUR '}}
 					| {{income.description}}
 		// - Expediture list
@@ -42,6 +42,6 @@ block content
 				a.list-group-item.list-group-item-warning(href='#',ng-if="Main.expediture.addText.length")
 					span.badge {{Main.expediture.addAmount | currency: 'EUR '}}
 					| {{Main.expediture.addText}}
-				a.list-group-item.list-group-item-warning(href='#',ng-repeat="expediture in Main.expeditures | orderBy: '-amount'",ng-init="Main.addToExpeditures(expediture.amount)",ng-mouseover="Main.selected = expediture",data-toggle="tooltip",title="Click to remove",ng-mouseleave="Main.selected = null",ng-class="{active: Main.selected == expediture}",ng-click="Main.remove('expeditures', $index)")
+				a.list-group-item.list-group-item-warning(href='#',ng-repeat="expediture in Main.expeditures",ng-init="Main.addToExpeditures(expediture.amount)",ng-mouseover="Main.selected = expediture",data-toggle="tooltip",title="Click to remove",ng-mouseleave="Main.selected = null",ng-class="{active: Main.selected == expediture}",ng-click="Main.remove('expeditures', $index)")
 					span.badge {{expediture.amount | currency: 'EUR '}}
 					| {{expediture.description}}
