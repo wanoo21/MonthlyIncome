@@ -5,13 +5,20 @@ block content
 		.col-md-12
 			h1 
 				span(data-toggle="tooltip",title="Successful rank") Rank: {{ Main.rank || 0 | number: 0 }} 
+				br.visible-xs
 				small(ng-class="{'text-danger': Main.rank < 40, 'text-warning': Main.rank < 60, 'text-info': Main.rank < 80, 'text-success': Main.rank >= 80}") {{Main.getStatus()}}
 			blockquote
-				p.text-info Deposited income: {{Main.incomes.sum('amount') - Main.expeditures.sum('amount') | currency: 'EUR '}}/month, {{ (Main.incomes.sum('amount') - Main.expeditures.sum('amount')) * 12 || 0 | currency: 'EUR '}}/year.
+				p.text-info 
+					strong Deposited income: 
+					br.visible-xs 
+					| {{Main.incomes.sum('amount') - Main.expeditures.sum('amount') | currency: 'EUR '}}/month,
+					br.visible-xs
+					| {{ (Main.incomes.sum('amount') - Main.expeditures.sum('amount')) * 12 || 0 | currency: 'EUR '}}/year.
 				footer Our monthly calculator
 		// - Income list
 		.col-md-6.col-sm-6.col-xs-12
 			h2 Income list
+				br.visible-xs
 				small.text-success(data-toggle="tooltip",title="Total incomes",ng-show="Main.incomes")  {{ Main.incomes.sum('amount') | currency: 'EUR ' }}
 			form.input-group(ng-submit="Main.add('income')")
 				input.form-control(type="text",autofocus,placeholder="Create new income",ng-model="Main.income.addText",ng-show="!Main.income.showAmount")
@@ -30,6 +37,7 @@ block content
 		// - Expediture list
 		.col-md-6.col-sm-6.col-xs-12
 			h2 Expediture list 
+				br.visible-xs
 				small.text-warning(data-toggle="tooltip",title="Total expeditures",ng-show="Main.expeditures") {{ Main.expeditures.sum('amount') | currency: 'EUR ' }}
 			form.input-group(ng-submit="Main.add('expediture')")
 				input.form-control(type="text",placeholder="Create new expediture",ng-model="Main.expediture.addText",ng-show="!Main.expediture.showAmount")
