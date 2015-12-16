@@ -2,8 +2,11 @@ doctype html
 html
 	head
 		block title
-			title= title
+			title Monthly Income Management
+		block meta
+			meta(name="description",content="Manage your expenditures, and remove them from your monthly activities! Follow all advices from our platform for a better result.")
 		meta(name="viewport",content="width=device-width, initial-scale=1.0, user-scalable=no")
+		meta(name="google-site-verification",content="8jtKltD6T2ns2fyRMuP1DEhvMenwOuJUupv0Z-_KqPo")
 		link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css", rel="stylesheet", integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==", crossorigin="anonymous")
 		link(rel='stylesheet',href='/stylesheets/style.css')
 	body
@@ -14,7 +17,7 @@ html
 							span.sr-only Toggle navigation
 							each val in [0, 1, 2]
 								span.icon-bar
-						a.navbar-brand(href='#') Monthly Income
+						a.navbar-brand(href='/') Monthly Income
 					.collapse.navbar-collapse#bs-example-navbar-collapse-1
 						ul.nav.navbar-nav.navbar-right
 							li 
@@ -23,7 +26,10 @@ html
 								a(href='/register') Register
 		.container
 			block content
-				h1 Welcome #{title}
-				
+				.well
+					h1 Grow up your monthly income
+					p Grow up fast your monthly income with your <strong>monthly income management</strong>. Manage your expenditures, and remove them from your monthly activities! Follow all advices from our platform for a better result. 
+					p 
+						strong All informations are confidential!
 		script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js")
 		script(src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js", integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==", crossorigin="anonymous")
