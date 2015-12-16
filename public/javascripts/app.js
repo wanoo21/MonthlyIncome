@@ -27,13 +27,13 @@ app.controller('MyCtrl', function($scope, $resource){
 	// Get status
 	self.getStatus = function(){
 		self.rank = 100 - ( 100 * self.expeditures.sum('amount') / self.incomes.sum('amount') )
-		if(self.rank >= 0 && self.rank < 25) {
+		if(self.rank >= 0 && self.rank < 40) {
 			return "Very bad, your rank is very low, try to find work."
-		} else if(self.rank < 50) {
+		} else if(self.rank < 60) {
 			return "Bad, your rank is low."
-		} else if(self.rank < 70) {
-			return "Good, your rank is greather than 50."
-		} else if(self.rank >= 90) {
+		} else if(self.rank < 80) {
+			return "Good, your rank is greather than 70."
+		} else if(self.rank >= 80) {
 			return "Super, you are a businessman."
 		}
 	}
