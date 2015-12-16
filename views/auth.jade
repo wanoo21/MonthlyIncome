@@ -3,6 +3,8 @@ extends ./index.jade
 block content
 	.col-md-9.col-md-offset-3
 	h1.text-center= title
+	if info.length
+		.alert.alert-info= info
 	if register
 		form.form-horizontal(method="post")
 			.form-group

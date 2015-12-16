@@ -7,9 +7,10 @@ var session = require('cookie-session');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var flash = require('connect-flash');
 
 var mongoose = require('mongoose');
-var config = require('./config.json')
+var config = require('./config.json');
 
 var User = require('./models/users');
 
@@ -44,8 +45,9 @@ app.use(session({
   secret: 'monthly-income',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
-}))
+  cookie: { secure: true, maxAge: 60000 }
+}));
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(require('node-sass-middleware')({

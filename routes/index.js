@@ -32,7 +32,7 @@ router.get('/logout', function(req, res, next){
 })
 
 router.get('/login', function(req, res, next){
-  res.render('auth', { login: true, title: 'Log In' })
+  res.render('auth', { login: true, title: 'Log In', info: req.flash('info') })
 })
 
 module.exports = router;

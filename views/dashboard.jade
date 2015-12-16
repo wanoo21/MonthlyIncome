@@ -1,34 +1,38 @@
 extends ./layout.jade
 
 block content
-	div(ng-controller="MyCtrl as Main")
+	div(ng-controller="MyCtrl as Main",onmouseover='$(\'[data-toggle="tooltip"]\').tooltip()')
+		// - Income list
 		.col-md-6.col-sm-6.col-xs-12
-			h2 Income list 
-				span(ng-bind="Main.incomeAmount")
-			.input-group
-				input.form-control(type="text",placeholder="Create new income",ng-model="Main.incomeText",ng-if="!showAmount")
-				input.form-control(type="number",placeholder="The amount of income",ng-model="Main.incomeAmount",ng-if="showAmount")
+			h2 Income list
+			form.input-group(ng-submit="Main.add('income')")
+				input.form-control(type="text",placeholder="Create new income",ng-model="Main.income.addText",ng-show="!Main.income.showAmount")
+				input.form-control(type="number",required,placeholder="The amount of income",ng-model="Main.income.addAmount",ng-show="Main.income.showAmount")
 				.input-group-btn
-					button.btn.btn-success(ng-click="showAmount = !showAmount", ng-class='{active: !!showAmount}') Add Amount
-					button.btn.btn-success(ng-disabled="!Main.incomeText.length || Main.incomeAmount < 1") Add
+					button.btn.btn-success(ng-disabled="!Main.income.addText",ng-click="Main.income.showAmount = !Main.income.showAmount", ng-class='{active: !!Main.income.showAmount}') Add Amount
+					button.btn.btn-success(ng-disabled="!Main.income.addText || !Main.income.addAmount",type="submit") Add
 			br
 			div.list-group
-				a.list-group-item.list-group-item-success(href='#',ng-if="Main.incomeText.length") 
-					span.badge {{Main.incomeAmount | currency: 'MDL '}}
-					{{Main.incomeText}}
-				each n in [0,1,2]
-					a.list-group-item.list-group-item-success(class={active: n == 1}, href='#')
-						span.badge 12
-						| Cras #{n}
+				a.list-group-item.list-group-item-success(href='#',ng-if="Main.income.addText.length")
+					span.badge {{Main.income.addAmount | currency: 'MDL '}}
+					{{Main.income.addText}}
+				a.list-group-item.list-group-item-success(href='#',ng-repeat="income in Main.incomes",ng-mouseover="Main.selected = income",data-toggle="tooltip",title="Click to remove",ng-mouseleave="Main.selected = null",ng-class="{active: Main.selected == income}",ng-click="Main.remove('incomes', $index)")
+					span.badge {{income.amount | currency: 'MDL '}}
+					| {{income.description}}
+		// - Expediture list
 		.col-md-6.col-sm-6.col-xs-12
-			h2 Exposure list
-			.input-group
-				input.form-control(type="text",placeholder="Create new exposure")
+			h2 Expediture list
+			form.input-group(ng-submit="Main.add('expediture')")
+				input.form-control(type="text",placeholder="Create new expediture",ng-model="Main.expediture.addText",ng-show="!Main.expediture.showAmount")
+				input.form-control(type="number",required,placeholder="The amount of expediture",ng-model="Main.expediture.addAmount",ng-show="Main.expediture.showAmount")
 				.input-group-btn
-					button.btn.btn-danger Add Amount
+					button.btn.btn-success(ng-disabled="!Main.expediture.addText",ng-click="Main.expediture.showAmount = !Main.expediture.showAmount", ng-class='{active: !!Main.expediture.showAmount}') Add Amount
+					button.btn.btn-success(ng-disabled="!Main.expediture.addText || !Main.expediture.addAmount",type="submit") Add
 			br
 			div.list-group
-				each n in [0,1,2]
-					a.list-group-item.list-group-item-danger(class={active: n == 2}, href='#')
-						span.badge 12
-						| Cras #{n}
+				a.list-group-item.list-group-item-warning(href='#',ng-if="Main.expediture.addText.length")
+					span.badge {{Main.expediture.addAmount | currency: 'MDL '}}
+					{{Main.expediture.addText}}
+				a.list-group-item.list-group-item-warning(href='#',ng-repeat="expediture in Main.expeditures",ng-mouseover="Main.selected = expediture",data-toggle="tooltip",title="Click to remove",ng-mouseleave="Main.selected = null",ng-class="{active: Main.selected == expediture}",ng-click="Main.remove('expeditures', $index)")
+					span.badge {{expediture.amount | currency: 'MDL '}}
+					| {{expediture.description}}
