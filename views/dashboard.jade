@@ -2,37 +2,46 @@ extends ./layout.jade
 
 block content
 	div(ng-controller="MyCtrl as Main",onmouseover='$(\'[data-toggle="tooltip"]\').tooltip()')
+		.col-md-12
+			h1 
+				span(data-toggle="tooltip",title="Successful rank") Rank: {{ Main.rank | number: 0 }} 
+				small(ng-class="{'text-danger': Main.rank < 25, 'text-warning': Main.rank < 50, 'text-info': Main.rank < 70, 'text-success': Main.rank >= 90}") {{Main.getStatus()}}
+			blockquote
+				p.text-info Deposited income: {{Main.incomes.sum('amount') - Main.expeditures.sum('amount') | currency: 'EUR '}}/month, {{ (Main.incomes.sum('amount') - Main.expeditures.sum('amount')) * 12 || 0 | currency: 'EUR '}}/year.
+				footer Our monthly calculator
 		// - Income list
 		.col-md-6.col-sm-6.col-xs-12
 			h2 Income list
+				small.text-success(data-toggle="tooltip",title="Total incomes",ng-show="Main.incomes")  {{ Main.incomes.sum('amount') | currency: 'EUR ' }}
 			form.input-group(ng-submit="Main.add('income')")
-				input.form-control(type="text",placeholder="Create new income",ng-model="Main.income.addText",ng-show="!Main.income.showAmount")
+				input.form-control(type="text",autofocus,placeholder="Create new income",ng-model="Main.income.addText",ng-show="!Main.income.showAmount")
 				input.form-control(type="number",required,placeholder="The amount of income",ng-model="Main.income.addAmount",ng-show="Main.income.showAmount")
 				.input-group-btn
-					button.btn.btn-success(ng-disabled="!Main.income.addText",ng-click="Main.income.showAmount = !Main.income.showAmount", ng-class='{active: !!Main.income.showAmount}') Add Amount
+					button.btn.btn-success(type="button",ng-disabled="!Main.income.addText",ng-click="Main.income.showAmount = !Main.income.showAmount", ng-class='{active: !!Main.income.showAmount}') Add Amount
 					button.btn.btn-success(ng-disabled="!Main.income.addText || !Main.income.addAmount",type="submit") Add
 			br
 			div.list-group
 				a.list-group-item.list-group-item-success(href='#',ng-if="Main.income.addText.length")
-					span.badge {{Main.income.addAmount | currency: 'MDL '}}
-					{{Main.income.addText}}
-				a.list-group-item.list-group-item-success(href='#',ng-repeat="income in Main.incomes",ng-mouseover="Main.selected = income",data-toggle="tooltip",title="Click to remove",ng-mouseleave="Main.selected = null",ng-class="{active: Main.selected == income}",ng-click="Main.remove('incomes', $index)")
-					span.badge {{income.amount | currency: 'MDL '}}
+					span.badge {{Main.income.addAmount | currency: 'EUR '}}
+					| {{Main.income.addText}}
+				a.list-group-item.list-group-item-success(href='#',ng-repeat="income in Main.incomes | orderBy: '-amount'",ng-mouseover="Main.selected = income",data-toggle="tooltip",title="Click to remove",ng-mouseleave="Main.selected = null",ng-class="{active: Main.selected == income}",ng-click="Main.remove('incomes', $index)")
+					span.badge {{income.amount | currency: 'EUR '}}
 					| {{income.description}}
 		// - Expediture list
 		.col-md-6.col-sm-6.col-xs-12
-			h2 Expediture list
+			h2 Expediture list 
+				small.text-warning(data-toggle="tooltip",title="Total expeditures",ng-show="Main.expeditures") {{ Main.expeditures.sum('amount') | currency: 'EUR ' }}
 			form.input-group(ng-submit="Main.add('expediture')")
 				input.form-control(type="text",placeholder="Create new expediture",ng-model="Main.expediture.addText",ng-show="!Main.expediture.showAmount")
 				input.form-control(type="number",required,placeholder="The amount of expediture",ng-model="Main.expediture.addAmount",ng-show="Main.expediture.showAmount")
 				.input-group-btn
-					button.btn.btn-success(ng-disabled="!Main.expediture.addText",ng-click="Main.expediture.showAmount = !Main.expediture.showAmount", ng-class='{active: !!Main.expediture.showAmount}') Add Amount
-					button.btn.btn-success(ng-disabled="!Main.expediture.addText || !Main.expediture.addAmount",type="submit") Add
+					button.btn.btn-warning(type="button",ng-disabled="!Main.expediture.addText",ng-click="Main.expediture.showAmount = !Main.expediture.showAmount", ng-class='{active: !!Main.expediture.showAmount}') Add Amount
+					button.btn.btn-warning(ng-disabled="!Main.expediture.addText || !Main.expediture.addAmount",type="submit") Add
 			br
 			div.list-group
 				a.list-group-item.list-group-item-warning(href='#',ng-if="Main.expediture.addText.length")
-					span.badge {{Main.expediture.addAmount | currency: 'MDL '}}
-					{{Main.expediture.addText}}
-				a.list-group-item.list-group-item-warning(href='#',ng-repeat="expediture in Main.expeditures",ng-mouseover="Main.selected = expediture",data-toggle="tooltip",title="Click to remove",ng-mouseleave="Main.selected = null",ng-class="{active: Main.selected == expediture}",ng-click="Main.remove('expeditures', $index)")
-					span.badge {{expediture.amount | currency: 'MDL '}}
+					span.badge {{Main.expediture.addAmount | currency: 'EUR '}}
+					| {{Main.expediture.addText}}
+				a.list-group-item.list-group-item-warning(href='#',ng-repeat="expediture in Main.expeditures | orderBy: '-amount'",ng-init="Main.addToExpeditures(expediture.amount)",ng-mouseover="Main.selected = expediture",data-toggle="tooltip",title="Click to remove",ng-mouseleave="Main.selected = null",ng-class="{active: Main.selected == expediture}",ng-click="Main.remove('expeditures', $index)")
+					span.badge {{expediture.amount | currency: 'EUR '}}
 					| {{expediture.description}}
