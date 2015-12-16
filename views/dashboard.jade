@@ -4,7 +4,7 @@ block content
 	div(ng-controller="MyCtrl as Main",onmouseover='$(\'[data-toggle="tooltip"]\').tooltip()')
 		.col-md-12
 			h1 
-				span(data-toggle="tooltip",title="Successful rank") Rank: {{ Main.rank || 0 | number: 0 }}
+				span(data-toggle="tooltip",title="Successful rank") Rank: {{ Main.rank || 0 | number: 0 }} 
 				small(ng-class="{'text-danger': Main.rank < 40, 'text-warning': Main.rank < 60, 'text-info': Main.rank < 80, 'text-success': Main.rank >= 80}") {{Main.getStatus()}}
 			blockquote
 				p.text-info Deposited income: {{Main.incomes.sum('amount') - Main.expeditures.sum('amount') | currency: 'EUR '}}/month, {{ (Main.incomes.sum('amount') - Main.expeditures.sum('amount')) * 12 || 0 | currency: 'EUR '}}/year.
