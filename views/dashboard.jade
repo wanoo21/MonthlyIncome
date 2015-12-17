@@ -11,7 +11,7 @@ block content
 				p.text-info 
 					strong Deposited income: 
 					br.visible-xs 
-					| {{Main.incomes.sum('amount') - Main.expeditures.sum('amount') | currency: 'EUR '}}/month,
+					| {{Main.incomes.sum('amount') - Main.expeditures.sum('amount') | currency: 'EUR '}}/month, 
 					br.visible-xs
 					| {{ (Main.incomes.sum('amount') - Main.expeditures.sum('amount')) * 12 || 0 | currency: 'EUR '}}/year.
 				footer Our monthly calculator
